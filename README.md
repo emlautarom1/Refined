@@ -41,5 +41,5 @@ int unrefX = player.Age;
 ## Tests
 
 ```shell
-dotnet test Refined
+dotnet test
 ```
