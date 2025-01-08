@@ -2,13 +2,16 @@
 
 Refinement types for C# using generics and structs for minimal overhead.
 
+Inspired by Haskell's [refined](https://hackage.haskell.org/package/refined).
+
 ## Features
 
-- Extensible refinements.
+- Extensible and composable refinements.
 - Implicit conversions.
 - Minimal overhead through the usage of Generics.
-- Composability through `And`, `Or`, operators.
-- Literal constants (ex. `string`, `int`, etc.).
+- Logical operators like `And`, `Or` and `Not`.
+- Numerical operators like `<`, `>` and `=`.
+- Literal constants for `string`, `int`, etc.
 
 ## Examples
 
@@ -33,4 +36,10 @@ var player = new Player(x.Refine<int, NonZero<int>>());
 
 // Implicit conversions are supported.
 int unrefX = player.Age;
+```
+
+## Tests
+
+```shell
+dotnet test Refined
 ```
