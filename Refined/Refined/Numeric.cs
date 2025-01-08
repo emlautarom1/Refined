@@ -21,7 +21,7 @@ public abstract class GreaterThan<TValue, TConst> : IRefinement<TValue>
 {
     public static void Refine(TValue value)
     {
-        if (value.CompareTo(TConst.Value) < 0) throw new RefinementException();
+        if (value.CompareTo(TConst.Value) <= 0) throw new RefinementException();
     }
 }
 
