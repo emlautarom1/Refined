@@ -2,6 +2,7 @@
 using Refined.Constants;
 using Refined.Numeric;
 using Refined.Collections;
+using Refined.Logic;
 
 namespace Refined.Tests;
 
