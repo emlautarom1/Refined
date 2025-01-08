@@ -27,3 +27,20 @@ public abstract class Or<TValue, TLeft, TRight> : IRefinement<TValue>
         }
     }
 }
+
+public abstract class Not<TValue, TRefinement> : IRefinement<TValue>
+    where TRefinement : IRefinement<TValue>
+{
+    public static void Refine(TValue value)
+    {
+        try
+        {
+            TRefinement.Refine(value);
+        }
+        catch (RefinementException)
+        {
+            return;
+        }
+        throw new RefinementException();
+    }
+}
