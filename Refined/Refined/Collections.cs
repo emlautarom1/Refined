@@ -16,8 +16,8 @@ public abstract class CountIs<TElem, TRefinement> : IRefinement<IReadOnlyCollect
 public readonly struct Vector<TElem, TLength>(IReadOnlyList<TElem> elements)
     where TLength : IConst<int>
 {
-    private readonly Refine<IReadOnlyList<TElem>, CountIs<TElem, GreaterThan<int, TLength>>> _refined =
-        elements.Refine<IReadOnlyList<TElem>, CountIs<TElem, GreaterThan<int, TLength>>>();
+    private readonly Refine<IReadOnlyList<TElem>, CountIs<TElem, EqualTo<int, TLength>>> _refined =
+        elements.Refine<IReadOnlyList<TElem>, CountIs<TElem, EqualTo<int, TLength>>>();
 
     public IReadOnlyList<TElem> AsReadOnlyList() => _refined.Unrefine;
 }
