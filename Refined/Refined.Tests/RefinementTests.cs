@@ -172,6 +172,15 @@ public class RefinementTests
     }
 
     [Test]
+    public void Add()
+    {
+        var value = 2;
+        var refined = value.Refine<int, EqualTo<int, Add<_1<int>, _1<int>>>>();
+
+        refined.Unrefine.Should().Be(value);
+    }
+
+    [Test]
     public void Vector()
     {
         IReadOnlyList<double> codes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
