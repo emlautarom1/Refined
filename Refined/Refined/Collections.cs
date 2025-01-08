@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using Refined.Constants;
-using Refined.Numeric;
 
-namespace Refined.Collections;
+namespace Refined;
 
 public abstract class CountIs<TElem, TRefinement> : IRefinement<IReadOnlyCollection<TElem>>
     where TRefinement : IRefinement<int>

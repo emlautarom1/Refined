@@ -1,4 +1,4 @@
-namespace Refined.Logic;
+namespace Refined;
 
 public abstract class And<TValue, TLeft, TRight> : IRefinement<TValue>
     where TLeft : IRefinement<TValue>

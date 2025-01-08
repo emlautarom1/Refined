@@ -1,6 +1,6 @@
 using System.Numerics;
 
-namespace Refined.Constants;
+namespace Refined;
 
 public interface IConst<out T>
 {
@@ -26,4 +26,3 @@ public abstract class _20<T> : IConst<T> where T : INumber<T>
 {
     public static T Value => T.CreateChecked(20);
 }
-

@@ -1,9 +1,7 @@
 using System;
 using System.Numerics;
-using Refined.Constants;
-using Refined.Logic;
 
-namespace Refined.Numeric;
+namespace Refined;
 
 public abstract class Add<TLeft, TRight> : IConst<int>
     where TLeft : IConst<int>
