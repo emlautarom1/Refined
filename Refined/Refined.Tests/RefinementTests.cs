@@ -1,4 +1,4 @@
-using FluentAssertions;
+﻿using FluentAssertions;
 using Refined.Constants;
 using Refined.Numeric;
 using Refined.Collections;
@@ -44,7 +44,8 @@ public class RefinementTests
     public void RefineAndUnrefine()
     {
         int x = 10;
-        Refine<int, NonZero<int>> refined = x.Refine<int, NonZero<int>>();
+        var refined = x.Refine<int, NonZero<int>>();
+
         int unrefined = refined;
         int unrefinedExplicit = refined.Unrefine;
 
@@ -59,9 +60,9 @@ public class RefinementTests
     [TestCase(int.MaxValue)]
     public void NumericNonZero(int value)
     {
-        Action tryRefine = () => value.Refine<int, NonZero<int>>();
+        var refined = value.Refine<int, NonZero<int>>();
 
-        tryRefine.Should().NotThrow<RefinementException>();
+        refined.Unrefine.Should().Be(value);
     }
 
     [Test]
@@ -75,9 +76,10 @@ public class RefinementTests
     [Test]
     public void GreaterThan()
     {
-        Action tryRefine = () => 11.Refine<int, GreaterThan<int, _10<int>>>();
+        var value = 11;
+        var refined = value.Refine<int, GreaterThan<int, _10<int>>>();
 
-        tryRefine.Should().NotThrow<RefinementException>();
+        refined.Unrefine.Should().Be(value);
     }
 
     [Test]
@@ -100,9 +102,10 @@ public class RefinementTests
     [Test]
     public void LessThan()
     {
-        Action tryRefine = () => 9.Refine<int, LessThan<int, _10<int>>>();
+        var value = 9;
+        var refined = value.Refine<int, LessThan<int, _10<int>>>();
 
-        tryRefine.Should().NotThrow<RefinementException>();
+        refined.Unrefine.Should().Be(value);
     }
 
     [Test]
@@ -124,9 +127,10 @@ public class RefinementTests
     [Test]
     public void AndRange()
     {
-        Action tryRefine = () => 15.Refine<int, And<int, GreaterThan<int, _10<int>>, LessThan<int, _20<int>>>>();
+        var value = 15;
+        var refined = value.Refine<int, And<int, GreaterThan<int, _10<int>>, LessThan<int, _20<int>>>>();
 
-        tryRefine.Should().NotThrow<RefinementException>();
+        refined.Unrefine.Should().Be(value);
     }
 
     [Test]
@@ -148,17 +152,19 @@ public class RefinementTests
     [Test]
     public void OrAcceptsLeft()
     {
-        Action tryRefine = () => 0.Refine<int, Or<int, EqualTo<int, _0<int>>, GreaterThan<int, _10<int>>>>();
+        var value = 0;
+        var refined = value.Refine<int, Or<int, EqualTo<int, _0<int>>, GreaterThan<int, _10<int>>>>();
 
-        tryRefine.Should().NotThrow<RefinementException>();
+        refined.Unrefine.Should().Be(value);
     }
 
     [Test]
     public void OrAcceptsRight()
     {
-        Action tryRefine = () => 0.Refine<int, Or<int, GreaterThan<int, _10<int>>, EqualTo<int, _0<int>>>>();
+        var value = 0;
+        var refined = value.Refine<int, Or<int, GreaterThan<int, _10<int>>, EqualTo<int, _0<int>>>>();
 
-        tryRefine.Should().NotThrow<RefinementException>();
+        refined.Unrefine.Should().Be(value);
     }
 
     [Test]
