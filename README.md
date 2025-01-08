@@ -10,7 +10,7 @@ Refinement types for C# using generics and structs for minimal overhead.
 - Composability through `And`, `Or`, operators.
 - Literal constants (ex. `string`, `int`, etc.).
 
-## Example
+## Examples
 
 ```C#
 // Define refinements as `abstract class` implementing `IRefinement` for any type.
@@ -22,15 +22,15 @@ public abstract class NonZero<TValue> : IRefinement<TValue> where TValue : INumb
     }
 }
 
-public record MyRecord(Refined<int, NonZero<int>> X);
+public record Player(Refine<int, NonZero<int>> Age);
 
 // Take any value as input.
 int x = 10;
 
 // Use `Refine` to refine a value.
 // Throws `RefinementException` if the operation fails.
-var record = new MyRecord(x.Refine<int, NonZero<int>>());
+var player = new Player(x.Refine<int, NonZero<int>>());
 
 // Implicit conversions are supported.
-int unrefX = record.X;
+int unrefX = player.Age;
 ```
