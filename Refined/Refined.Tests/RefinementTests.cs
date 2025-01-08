@@ -62,6 +62,14 @@ public class RefinementTests
     }
 
     [Test]
+    public void DefaultRefineThrows()
+    {
+        var tryRefineDefault = () => new Refine<int, NonZero<int>>();
+
+        tryRefineDefault.Should().Throw<RefinementException>();
+    }
+
+    [Test]
     public void NonZeroThrowsOnZero()
     {
         Action tryRefine = () => 0.Refine<int, NonZero<int>>();
