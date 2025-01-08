@@ -1,6 +1,7 @@
 using System;
 using System.Numerics;
 using Refined.Constants;
+using Refined.Logic;
 
 namespace Refined.Numeric;
 
@@ -11,13 +12,8 @@ public abstract class Add<TLeft, TRight> : IConst<int>
     public static int Value => TLeft.Value + TRight.Value;
 }
 
-public abstract class NonZero<TValue> : IRefinement<TValue> where TValue : INumber<TValue>
-{
-    public static void Refine(TValue value)
-    {
-        if (value < TValue.Zero) throw new RefinementException();
-    }
-}
+public abstract class NonZero<TValue> : Not<TValue, EqualTo<TValue, _0<TValue>>>
+    where TValue : INumber<TValue>;
 
 public abstract class GreaterThan<TValue, TConst> : IRefinement<TValue>
     where TConst : IConst<TValue>
