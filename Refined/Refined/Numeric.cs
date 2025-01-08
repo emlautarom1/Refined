@@ -38,3 +38,13 @@ public abstract class LessThan<TValue, TConst> : IRefinement<TValue>
         if (value.CompareTo(TConst.Value) >= 0) throw new RefinementException();
     }
 }
+
+public abstract class EqualTo<TValue, TConst> : IRefinement<TValue>
+    where TConst : IConst<TValue>
+    where TValue : IComparable<TValue>
+{
+    public static void Refine(TValue value)
+    {
+        if (value.CompareTo(TConst.Value) != 0) throw new RefinementException();
+    }
+}
