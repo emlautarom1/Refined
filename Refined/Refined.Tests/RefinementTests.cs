@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Refined.Constants;
 using Refined.Numeric;
 using Refined.Collections;
@@ -190,5 +190,14 @@ public class RefinementTests
         Func<Vector<double, _10<int>>> tryRefine = () => new(codes);
 
         tryRefine.Should().Throw<RefinementException>();
+    }
+
+    [Test]
+    public void ForAll()
+    {
+        IReadOnlyCollection<int> collection = [1, 2, 3];
+        var refined = collection.Refine<IReadOnlyCollection<int>, ForAll<IReadOnlyCollection<int>, int, NonZero<int>>>();
+
+        refined.Unrefine.Should().BeEquivalentTo(collection);
     }
 }

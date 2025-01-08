@@ -13,6 +13,19 @@ public abstract class CountIs<TElem, TRefinement> : IRefinement<IReadOnlyCollect
     }
 }
 
+public abstract class ForAll<TColl, TElem, TRefinement> : IRefinement<TColl>
+    where TColl : IReadOnlyCollection<TElem>
+    where TRefinement : IRefinement<TElem>
+{
+    public static void Refine(TColl value)
+    {
+        foreach (var elem in value)
+        {
+            TRefinement.Refine(elem);
+        }
+    }
+}
+
 public readonly struct Vector<TElem, TLength>(IReadOnlyList<TElem> elements)
     where TLength : IConst<int>
 {
