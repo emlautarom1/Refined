@@ -16,12 +16,12 @@ Inspired by Haskell's [refined](https://hackage.haskell.org/package/refined).
 ## Examples
 
 ```C#
-// Define refinements as `abstract class` implementing `IRefinement` for any type.
+// Define refinements as an `abstract class` that implements `IRefinement` for the target type.
 public abstract class NonZero<TValue> : IRefinement<TValue> where TValue : INumber<TValue>
 {
     public static void Refine(TValue value)
     {
-        if (value < TValue.Zero) throw new RefinementException();
+        if (value == TValue.Zero) throw new RefinementException();
     }
 }
 
@@ -34,7 +34,7 @@ int x = 10;
 // Throws `RefinementException` if the operation fails.
 var player = new Player(x.Refine<int, NonZero<int>>());
 
-// Implicit conversions are supported.
+// Implicit conversions to the original types are supported.
 int unrefX = player.Age;
 ```
 
