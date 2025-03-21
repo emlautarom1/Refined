@@ -17,6 +17,8 @@ public abstract class GreaterThan<TValue, TConst> : IRefinement<TValue>
     where TConst : IConst<TValue>
     where TValue : IComparable<TValue>
 {
+    public static string Explain => $"greater than {TConst.Value}";
+
     public static void Refine(TValue value)
     {
         if (value.CompareTo(TConst.Value) <= 0) throw new RefinementException();
@@ -27,6 +29,8 @@ public abstract class LessThan<TValue, TConst> : IRefinement<TValue>
     where TConst : IConst<TValue>
     where TValue : IComparable<TValue>
 {
+    public static string Explain => $"less than {TConst.Value}";
+
     public static void Refine(TValue value)
     {
         if (value.CompareTo(TConst.Value) >= 0) throw new RefinementException();
@@ -37,6 +41,8 @@ public abstract class EqualTo<TValue, TConst> : IRefinement<TValue>
     where TConst : IConst<TValue>
     where TValue : IComparable<TValue>
 {
+    public static string Explain => $"equal to {TConst.Value}";
+
     public static void Refine(TValue value)
     {
         if (value.CompareTo(TConst.Value) != 0) throw new RefinementException();

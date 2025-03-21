@@ -6,6 +6,8 @@ namespace Refined;
 public abstract class CountIs<TElem, TRefinement> : IRefinement<IReadOnlyCollection<TElem>>
     where TRefinement : IRefinement<int>
 {
+    public static string Explain => $"Collection.Count should be {TRefinement.Explain}";
+
     public static void Refine(IReadOnlyCollection<TElem> value)
     {
         TRefinement.Refine(value.Count);
@@ -16,6 +18,8 @@ public abstract class ForAll<TColl, TElem, TRefinement> : IRefinement<TColl>
     where TColl : IReadOnlyCollection<TElem>
     where TRefinement : IRefinement<TElem>
 {
+    public static string Explain => $"All elements in Collection should be {TRefinement.Explain}";
+
     public static void Refine(TColl value)
     {
         foreach (var elem in value)
@@ -40,6 +44,8 @@ public readonly struct Bytes<TLength>(Memory<byte> memory)
     private abstract class LengthIs<TRefinement> : IRefinement<Memory<byte>>
     where TRefinement : IRefinement<int>
     {
+        public static string Explain => $"Memory.Length should be {TRefinement.Explain}";
+
         public static void Refine(Memory<byte> value)
         {
             TRefinement.Refine(value.Length);
