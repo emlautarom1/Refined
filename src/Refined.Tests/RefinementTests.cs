@@ -212,6 +212,17 @@ public class RefinementTests
     }
 
     [Test]
+    public void Bytes()
+    {
+        Memory<byte> codes = new([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]);
+        var bytes = new Bytes<_10<int>>(codes);
+
+        var unrefCodes = bytes.AsMemory();
+
+        codes.Should().BeEquivalentTo(unrefCodes);
+    }
+
+    [Test]
     public void ForAll()
     {
         IReadOnlyCollection<int> collection = [1, 2, 3];

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Refined;
@@ -31,4 +32,22 @@ public readonly struct Vector<TElem, TLength>(IReadOnlyList<TElem> elements)
         elements.Refine<IReadOnlyList<TElem>, CountIs<TElem, EqualTo<int, TLength>>>();
 
     public IReadOnlyList<TElem> AsReadOnlyList() => _refined.Unrefine;
+}
+
+public readonly struct Bytes<TLength>(Memory<byte> memory)
+    where TLength : IConst<int>
+{
+    private abstract class LengthIs<TRefinement> : IRefinement<Memory<byte>>
+    where TRefinement : IRefinement<int>
+    {
+        public static void Refine(Memory<byte> value)
+        {
+            TRefinement.Refine(value.Length);
+        }
+    }
+
+    private readonly Refine<Memory<byte>, LengthIs<EqualTo<int, TLength>>> _refined =
+        memory.Refine<Memory<byte>, LengthIs<EqualTo<int, TLength>>>();
+
+    public Memory<byte> AsMemory() => _refined.Unrefine;
 }
